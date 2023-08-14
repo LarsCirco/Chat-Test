@@ -1,3 +1,5 @@
+require('dotenv').config({ path: 'keys.env' });
+console.log('Loaded PRIVATE_KEY:', process.env.PRIVATE_KEY);
 const express = require("express");
 const cors = require("cors");
 const axios = require('axios');
@@ -8,12 +10,11 @@ app.use(cors({ origin: true }));
 
 app.post("/authenticate", async (req, res) => {
   const { username } = req.body;
-    // Get or create user on Chat Engine!
   try{
     const r = await axios.put(
         'https://api.chatengine.io/users/',
         {username:username, secret:username, first_name:username},
-        {headers: {"private-key": "305bc04b-c675-4afa-b805-dc61f017ca15"}}
+        {headers: {"private-key":process.env.PRIVATE_KEY}}
     )
     return res.status(r.status).json(r.data);
   } catch (e){

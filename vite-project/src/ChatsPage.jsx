@@ -1,10 +1,13 @@
-import {MultiChatSocket, MultiChatWindow, useMultiChatLogic} from 'react-chat-engine-advanced'
-
+import {MultiChatSocket, MultiChatWindow, useMultiChatLogic} from 'react-chat-engine-advanced';
+const multilogicKey = import.meta.env.VITE_REACT_APP_MULTILOGIC_KEY;
 const ChatsPage = (props) => {
-    const chatProps = useMultiChatLogic('f32b33b9-505a-4b90-81ea-0e62bbbadb2c', props.user.username, props.user.secret)
-    return( <div style ={{height: '100vh'}}>
-        <MultiChatSocket {...chatProps}/>
-        <MultiChatWindow {...chatProps} style={{height: '100%'}}/>
-    </div>)
+    const chatProps = useMultiChatLogic(multilogicKey, props.user.username, props.user.secret);
+    return( 
+        <div style ={{height: '100vh'}}>
+            <MultiChatSocket {...chatProps}/>
+            <MultiChatWindow {...chatProps} style={{height: '100%'}}/>
+        </div>
+    );
 }
-export default ChatsPage
+
+export default ChatsPage;
